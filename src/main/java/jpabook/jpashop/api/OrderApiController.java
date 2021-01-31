@@ -67,10 +67,6 @@ public class OrderApiController {
         return collect;
     }
 
-    @GetMapping("/api/v4/orders")
-    public List<OrderQueryDto> ordersV4() {
-
-    }
 
     @Data
     static class OrderDto {
