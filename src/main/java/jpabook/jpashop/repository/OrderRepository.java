@@ -1,7 +1,9 @@
 package jpabook.jpashop.repository;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.QOrder;
 import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -61,11 +63,18 @@ public class OrderRepository {
 
     public List<OrderSimpleQueryDto> findOrderDtos() {
         return em.createQuery(
-                "select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
+                "select new jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
                         " from Order o" +
                         " join o.member m" +
                         " join o.delivery d", OrderSimpleQueryDto.class)
                 .getResultList();
+    }
+
+    //TODO : Query Dsl 추가
+    public List<Order> findAllByQueryDsl() {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        QOrder o = new QOrder("o");
+        return queryFactory.selectFrom(o).fetch();
     }
 
     public List<Order> findAllWithItem() {

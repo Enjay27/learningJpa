@@ -62,4 +62,9 @@ public class OrderService {
     public List<Order> findOrders(OrderSearch orderSearch) {
         return orderRepository.findAll(orderSearch);
     }
+
+    //TODO : Query Dsl 추가
+    public List<Order> findOrdersByQueryDsl() {
+        return orderRepository.findAllByQueryDsl();
+    }
 }

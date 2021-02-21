@@ -5,9 +5,12 @@ import jpabook.jpashop.domain.item.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
+import javax.persistence.PrePersist;
 
 @Component
 @RequiredArgsConstructor
